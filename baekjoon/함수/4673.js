@@ -1,19 +1,24 @@
-function VerificationSelfNum(n) {
-  let number = n;
+const fs = require('fs');
+let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
+input = +input;
 
-  while (n > 0) {
-    number += n % 10;
-    n = Math.floor(n / 10);
+function answer(num) {
+  let count = 0;
+
+  if (num < 100) {
+    return num;
+  } else {
+    for (let i = 100; i <= num; i++) {
+      const hund = Math.floor(i / 100);
+      const ten = Math.floor((i % 100) / 10);
+      const one = i % 10;
+
+      if (hund - ten === ten - one) {
+        count++;
+      }
+    }
+    return 99 + count;
   }
-  return number;
 }
-const maxSelfNum = 10000;
-const selfNum = new Array(10000).fill(true);
 
-for (let i = 1; i <= maxSelfNum; i++) {
-  selfNum[VerificationSelfNum(i)] = false;
-
-  if (selfNum[i]) {
-    console.log(i);
-  }
-}
+console.log(answer(input));
