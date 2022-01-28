@@ -1,12 +1,13 @@
-const array = require('fs').readFileSync('/dev/stdin').toString().split('\n');
+const fs = require('fs');
+let input = fs.readFileSync('../input.txt').toString().trim().split('\n');
 
 const stack = [];
 const result = [];
 
-const len = array.shift();
+const repeatLen = input.shift();
 
-for (let i = 0; i < len; i++) {
-  switch (array[i]) {
+for (let i = 0; i < repeatLen; i++) {
+  switch (input[i]) {
     case 'pop':
       result.push(stack.pop() || -1);
       break;
@@ -24,7 +25,7 @@ for (let i = 0; i < len; i++) {
       break;
 
     default:
-      stack.push(array[i].split(' ')[1]);
+      stack.push(input[i].split(' ')[1]);
       break;
   }
 }
