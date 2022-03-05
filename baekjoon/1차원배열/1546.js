@@ -1,11 +1,20 @@
-const fs = require('fs');
-let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
+const readline = require('readline');
 
-const count = +input[0];
-let score = input[1].split(' ').map((v) => +v);
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+let arr = [];
+rl.on('line', function (line) {
+  arr.push(line);
 
-const max = Math.max(...score);
+}).on('close', function () {
+  let [count, score] = [arr[0], arr[1].split(' ').map(Number)];
 
-score = score.map((v) => (v / max) * 100);
+  const max = Math.max(...score);
 
-console.log(score.reduce((prev, cur) => prev + cur, 0) / count);
+  score = score.map((v) => (v / max) * 100);
+
+  console.log(score.reduce((prev, cur) => prev + cur, 0) / count);
+  process.exit();
+});
