@@ -41,7 +41,7 @@ rl.on('line', function (line) {
       }
     } else if (v[0] === 'F') {
       const value = Object.values(object);
-
+      console.log(value);
       console.log(validation(value, v[1]).join(' '));
     }
   });
