@@ -98,3 +98,20 @@ graph.addEdge('E', 'F');
 console.log(graph.depthFirstRecursive('A'));
 console.log(graph.depthFisrtIterative('A'));
 console.log(graph.breadthFisrtIterative('A'));
+
+class WeightedGraph {
+  constructor() {
+    this.node = {};
+  }
+
+  addVertex(vertex) {
+    if (!this.node[vertex]) {
+      this.node[vertex] = [];
+    }
+  }
+
+  addEdge(vertex1, vertex2, weight) {
+    this.node[vertex1].push({ node: vertex2, weight });
+    this.node[vertex2].push({ node: vertex1, weight });
+  }
+}
