@@ -26,14 +26,46 @@ rl.on('line', function (line) {
 });
 
 function solution(standard, validation) {
-  return validation.filter((v) => {
-    if (Math.abs(v.length - standard.length) > 1) {
-      return;
+  let answer = 0;
+
+  validation.forEach((v) => {
+    const start = [...standard];
+
+    if (Math.abs(v.length - start.length) === 1) {
+      if (v.length > start.length) {
+        for (let i = 0; i < v.length; i++) {
+          if (start.includes(v[i])) {
+            const idx = start.indexOf(v[i]);
+            start.splice(idx, 1);
+          }
+        }
+        if (start.length === 1) {
+          answer++;
+        }
+      } else if (v.length < start.length) {
+        for (let i = 0; i < start.length; i++) {
+          if (v.includes(start[i])) {
+            const idx = v.indexOf(start[i]);
+            v.splice(idx, 1);
+          }
+        }
+        if (v.length === 1) {
+          answer++;
+        }
+      } else {
+        for (let i = 0; i < v.length; i++) {
+          if (start.includes(v[i])) {
+            const idx = start.indexOf(v[i]);
+            start.splice(idx, 1);
+          }
+        }
+        if (start.length === 1 || start.length === 0) {
+          answer++;
+        }
+      }
     }
-    return (
-      v.length === v.filter((ele) => standard.includes(ele)).length ||
-      v.length === v.filter((ele) => standard.includes(ele)).length - 1 ||
-      v.length === v.filter((ele) => standard.includes(ele)).length + 1
-    );
-  }).length;
+    console.log(v);
+  });
+
+  return answer;
 }
