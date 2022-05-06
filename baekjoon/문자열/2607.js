@@ -31,40 +31,27 @@ function solution(standard, validation) {
   validation.forEach((v) => {
     const start = [...standard];
 
-    if (Math.abs(v.length - start.length) === 1) {
-      if (v.length > start.length) {
-        for (let i = 0; i < v.length; i++) {
-          if (start.includes(v[i])) {
-            const idx = start.indexOf(v[i]);
-            start.splice(idx, 1);
-          }
-        }
-        if (start.length === 1) {
-          answer++;
-        }
-      } else if (v.length < start.length) {
-        for (let i = 0; i < start.length; i++) {
-          if (v.includes(start[i])) {
-            const idx = v.indexOf(start[i]);
-            v.splice(idx, 1);
-          }
-        }
-        if (v.length === 1) {
-          answer++;
-        }
-      } else {
-        for (let i = 0; i < v.length; i++) {
-          if (start.includes(v[i])) {
-            const idx = start.indexOf(v[i]);
-            start.splice(idx, 1);
-          }
-        }
-        if (start.length === 1 || start.length === 0) {
-          answer++;
+    if (v.length < start.length) {
+      for (let i = 0; i < v.length; i++) {
+        if (start.includes(v[i])) {
+          const idx = start.indexOf(v[i]);
+          start.splice(idx, 1);
         }
       }
+      if (start.length === 1) {
+        answer++;
+      }
+    } else {
+      for (let i = 0; i < start.length; i++) {
+        if (v.includes(start[i])) {
+          const idx = v.indexOf(start[i]);
+          v.splice(idx, 1);
+        }
+      }
+      if (v.length === 1 || v.length === 0) {
+        answer++;
+      }
     }
-    console.log(v);
   });
 
   return answer;
